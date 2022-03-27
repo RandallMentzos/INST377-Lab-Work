@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="banner"><h1>Randall's Lab 5</h1></div>
+
+        <div class="container">
+            <form method="get" class="main-form">
+                <div class="wrapper">
+                    <div class="form-inputs">
+                        <label for="resto-name">First Name</label>
+                        <input type="text" name="resto-name" id="resto-name"></input>
+                        <label for="food-pref">Food Preference</label>
+                        <input type="text" name="food-pref" id="food-pref"></input>
+                    </div>
+                        
+                    <fieldset class="vegan">
+                        <legend>Veggie or Vegan?</legend>
+                        <label for="yes" class="radio-label">Yes</label>
+                        <input id="yes"
+                            name="vegan"
+                            type="radio"
+                            value="yes">
+                        <label for="no" class="radio-label">No</label>
+                        <input id="no"
+                            name="vegan"
+                            type="radio"
+                            value="no"
+                            checked>
+                    </fieldset>
+        
+                    <button class="submit">Submit</button>
+                    
+                </div>
+            </form>
+                
+
+            <div class="other-text"> 
+                This is going to be something in two weeks.
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
