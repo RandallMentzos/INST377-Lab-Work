@@ -3,40 +3,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
     <div class="banner"><h1>Prof A's Lab 5</h1></div>
 
-    <div class="columns">
+    <div class="container">
         <form action='https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json' method="get" class="login-form">
-            <div class="form-inputs">
-                <label for="resto-name">Enter Restaurant Name</label>
-                <div class="form-row" name="resto-name" id="resto-name"></div>
-                <label for="food-pref">Enter Food Preference</label>
-                <div class="form-row" name="food-pref" id="food-pref"></div>
+            <div class="wrapper">
+                <div class="form-inputs">
+                    <label for="resto-name">Enter Restaurant Name</label>
+                    <input type="text" name="resto-name" id="resto-name"></input>
+                    <label for="food-pref">Enter Food Preference</label>
+                    <input type="text" name="food-pref" id="food-pref"></input>
+                </div>
+                    
+                <fieldset class="vegan">
+                    <legend>Type of Talk</legend>
+                    <label for="yes" class="radio-label">Yes</label>
+                    <input id="yes"
+                        name="vegan"
+                        type="radio"
+                        value="yes">
+                    <label for="no" class="radio-label">No</label>
+                    <input id="no"
+                        name="vegan"
+                        type="radio"
+                        value="no"
+                        checked>
+                </fieldset>
+    
+                <button class="submit">Submit</button>
+                
             </div>
-
-            <fieldset class="vegan-option">
-                <legend>Type of Talk</legend>
-                <input id="yes"
-                       name="vegan"
-                       type="radio"
-                       value="yes">
-                <label for="yes" class="radio-label">Yes</label>
-                <input id="no"
-                       name="vegan"
-                       type="radio"
-                       value="no"
-                       checked>
-                <label for="no" class="radio-label">No</label>
-            </fieldset>
-
-            <button class="submit">Submit</button>
         </form>
+            
 
         <div> 
             This is going to be something in two weeks.
         </div>
+    </div>
 </body>
 </html>
