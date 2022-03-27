@@ -8,6 +8,8 @@
     color: #FFF;
     background-color: #5995DA;
     padding: 20px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .menu {
