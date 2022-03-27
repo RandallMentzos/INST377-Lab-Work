@@ -47,6 +47,10 @@ body {
 
 .banner {
   background-color: rgb(255, 211, 65);
+  padding: 10px;
+  width: 90%;
+  border-radius: 4px;
+  margin: 10px auto;
 }
 
 
