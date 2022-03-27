@@ -45,4 +45,4 @@ function mainEvent() {
   next.addEventListener('click', () => slideUp());
 }
 
-document.addEventListener('DOMContentLoaded', () => mainEvent());
+document.addEventListener('DOMContentLoaded', async () => mainEvent());
