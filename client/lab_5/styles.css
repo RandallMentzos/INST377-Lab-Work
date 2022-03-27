@@ -79,6 +79,10 @@ body {
   align-self: center;
 }
 
+.submit:hover {
+  background-color: rgb(25, 175, 175);
+}
+
 .vegan {
   padding: 10px;
   display: block;
