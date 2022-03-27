@@ -6,6 +6,14 @@
 
 button {
     margin: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px;
+    border: none;
+}
+
+button:hover {
+    background-color: #f3cc61;
 }
 
 .banner{
@@ -109,3 +117,12 @@ button {
     background-color: #5995DA;
     width: 300px;
 }
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
