@@ -25,3 +25,7 @@ body {
   max-width: 960px;
   margin-top: 25px;
 }
+
+.banner {
+  background-color: rgb(255, 211, 65);
+}
