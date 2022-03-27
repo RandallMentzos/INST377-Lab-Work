@@ -66,12 +66,22 @@
 .photo-grid {
     width: 900px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: center;
 }
 
 .photo-grid-item {
     border: 1px solid #fff;
     width: 300px;
     height: 300px;
+}
+
+.first-item {
+    order: -1;
+}
+
+.last-item {
+    order: 1;
 }
