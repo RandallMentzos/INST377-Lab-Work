@@ -49,5 +49,11 @@
     width: 900px;
     height: 300px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header a {
+    align-self: flex-end;
+    margin-bottom: 20px;
 }
