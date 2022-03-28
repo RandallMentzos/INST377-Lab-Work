@@ -7,6 +7,7 @@ function getRandomIntInclusive(min, max) {
 function dataHandler (restoArray) {
   // console.log('fired data handler');
   const range = [...Array(15).keys()];
+  // eslint-disable-next-line no-unused-vars
   const newList = range.map((item, index) => {
     const restNum = getRandomIntInclusive(0, restoArray.length - 1);
     return restoArray[restNum];
@@ -31,14 +32,14 @@ async function mainEvent() {
   const userlocation = document.querySelector('#zip');
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
-  
+
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
     let currentArray = [];
 
     userchoice.addEventListener('input', async (event) => {
       if (currentArray.length < 1) { return; }
-      console.log(event.target.value);
+      // console.log(event.target.value);
 
       const filterSearch = currentArray.filter((item) => {
         currentname = item.name.toLowerCase();
@@ -47,6 +48,19 @@ async function mainEvent() {
       });
       createHtmlList(filterSearch);
       // console.log(filterSearch);
+    });
+
+    userlocation.addEventListener('input', async (event) => {
+      if (currentArray.length < 1) { return; }
+      // console.log(event.target.value);
+
+      const filterZip = currentArray.filter((item) => {
+        currentzip = event.target.value;
+        restozip = item.zip;
+        return restozip.includes(currentzip);
+      });
+      createHtmlList(filterZip);
+      // console.log(filterZip);
     });
 
     button.addEventListener('click', async (submitEvent) => {
