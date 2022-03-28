@@ -8,6 +8,9 @@ function dataHandler (restoArray) {
   console.log('fired data handler');
   console.table(restoArray); 
   const range = [...Array(15).keys()];
+  range.forEach(item => {
+    console.log('range item', item);
+  })
   
   // this is called "dot notation"
   // arrayFromJson.data - we're accessing a key called 'data' on the returned object
