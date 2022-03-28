@@ -1,7 +1,7 @@
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min); 
+  const newMin = Math.ceil(min);
+  const newMax = Math.floor(max);
+  return Math.floor(Math.random() * (newMax - newMin + 1) + newMin); 
 };
 
 function dataHandler (restoArray) {
@@ -26,7 +26,6 @@ async function mainEvent() { // the async keyword means we can make API requests
 
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
-    console.log('button printed');
     button.addEventListener('click', async (submitEvent) => {
       submitEvent.preventDefault();
       console.log('clicked'); 
