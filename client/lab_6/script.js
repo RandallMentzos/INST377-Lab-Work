@@ -9,7 +9,7 @@ function dataHandler (restoArray) {
   const range = [...Array(15).keys()];
   const newList = range.map((item, index) => {
     const restNum = getRandomIntInclusive(0, restoArray.length - 1);
-    return restoArray[restNum]
+    return restoArray[restNum];
   });
   return newList;
 }
@@ -21,15 +21,14 @@ function createHtmlList(collection) {
   collection.forEach((item) => {
     const newLines = `<li>${item.name.toLowerCase()}</li>`;
     targetList.innerHTML += newLines;
-  })
+  });
 }
 
-async function mainEvent() { 
-  const form = document.querySelector('.main_form');
+async function mainEvent() {
   const button = document.querySelector('.submit');
   button.style.display = 'none';
-  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'); 
-  const arrayFromJson = await results.json(); 
+  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+  const arrayFromJson = await results.json();
 
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
