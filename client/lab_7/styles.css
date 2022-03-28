@@ -28,7 +28,7 @@
     justify-content: space-between;
   }
   
-  .main-form {
+  .main_form {
     background-color: #FFF;
     width: 250px;
     max-height: 400px;
@@ -36,7 +36,7 @@
     margin: 10px 30px;
   }
   
-  .other-text { 
+  .other_text { 
     background-color: #FFF;
     margin: auto 30px;
     min-width: 200px;
@@ -44,7 +44,7 @@
     border-radius: 6px;
   }
   
-  .form-inputs {
+  .form_inputs {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -61,7 +61,7 @@
     margin: 10px auto;
   }
   
-  .form-inputs label {
+  .form_inputs label {
     margin: 10 0 5 0;
     font-weight: bold;
     font-size: 1.2em;
@@ -105,11 +105,11 @@
     float: left;
   }
   
-  #food-pref {
+  #zip {
     margin-bottom: 10px;
   }
   
-  .radio-label {
+  .radio_label {
     padding: 5px;
     margin: 0 0 0 10;
   }

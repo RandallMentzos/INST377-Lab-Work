@@ -15,8 +15,8 @@ function dataHandler (restoArray) {
 }
 
 function createHtmlList(collection) {
-  console.log(collection);
-  const targetList = document.querySelector('.resto-list');
+  console.table(collection);
+  const targetList = document.querySelector('.resto_list');
   targetList.innerHTML = '';
   collection.forEach((item) => {
     const newLines = `<li>${item.name.toLowerCase()}</li>`;
@@ -27,8 +27,8 @@ function createHtmlList(collection) {
 async function mainEvent() {
   const button = document.querySelector('.submit');
   button.style.display = 'none';
-  const userchoice = document.querySelector('#resto-name');
-  const userlocation = document.querySelector('#zip-code');
+  const userchoice = document.querySelector('#resto_name');
+  const userlocation = document.querySelector('#zip');
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
 
