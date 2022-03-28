@@ -37,19 +37,23 @@ async function mainEvent() {
     let currentArray = [];
 
     userchoice.addEventListener('input', async (event) => {
-      if (currentArray === undefined) { return; }
+      if (currentArray.length < 1) { return; }
       console.log(event.target.value);
+
       const filterSearch = currentArray.filter((item) => {
-         return item.name === event.target.value
+        currentname = item.name.toLowerCase();
+        currentinput = event.target.value;
+        return currentname.includes(currentinput.toLowerCase());
       });
-      console.log(filterSearch);
+      createHtmlList(filterSearch);
+      // console.log(filterSearch);
     });
 
-      button.addEventListener('click', async (submitEvent) => {
-        submitEvent.preventDefault();
-        // console.log('clicked');
-        const restaurants = dataHandler(arrayFromJson);
-        createHtmlList(restaurants);
+    button.addEventListener('click', async (submitEvent) => {
+      submitEvent.preventDefault();
+      // console.log('clicked');
+      currentArray = dataHandler(arrayFromJson);
+      createHtmlList(currentArray);
     });
   }
 }
