@@ -32,6 +32,10 @@ async function mainEvent() {
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
 
+  userchoice.addEventListener('input', async (event) => {
+    console.log(event.target.value);
+  })
+
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
     button.addEventListener('click', async (submitEvent) => {
