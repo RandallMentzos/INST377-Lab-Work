@@ -11,26 +11,33 @@ function dataHandler (restoArray) {
     const restNum = getRandomIntInclusive(0, restoArray.length - 1);
     return restoArray[restNum]
   });
-
-  console.log(newList);
-  // this is called "dot notation"
-  // arrayFromJson.data - we're accessing a key called 'data' on the returned object
-  // it contains all 1,000 records we need
+  return newList;
 }
 
-async function mainEvent() { // the async keyword means we can make API requests
+function createHtmlList(collection) {
+  console.log(collection);
+  const targetList = document.querySelector('.resto-list');
+  targetList.innerHTML = '';
+  collection.forEach((item) => {
+    const newLines = `<li>${item.name.toLowerCase()}</li>`;
+    targetList.innerHTML += newLines;
+  })
+}
+
+async function mainEvent() { 
   const form = document.querySelector('.main_form');
   const button = document.querySelector('.submit');
   button.style.display = 'none';
-  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'); // This accesses some data from our API
-  const arrayFromJson = await results.json(); // This changes it into data we can use - an object
+  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'); 
+  const arrayFromJson = await results.json(); 
 
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
     button.addEventListener('click', async (submitEvent) => {
       submitEvent.preventDefault();
-      console.log('clicked'); 
-      dataHandler(arrayFromJson);
+      console.log('clicked');
+      const restaurants = dataHandler(arrayFromJson);
+      createHtmlList(restaurants);
     });
   }
 }
