@@ -5,7 +5,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 function dataHandler (restoArray) {
-  console.log('fired data handler');
+  // console.log('fired data handler');
   const range = [...Array(15).keys()];
   const newList = range.map((item, index) => {
     const restNum = getRandomIntInclusive(0, restoArray.length - 1);
@@ -15,7 +15,7 @@ function dataHandler (restoArray) {
 }
 
 function createHtmlList(collection) {
-  console.table(collection);
+  // console.table(collection);
   const targetList = document.querySelector('.resto_list');
   targetList.innerHTML = '';
   collection.forEach((item) => {
@@ -31,18 +31,25 @@ async function mainEvent() {
   const userlocation = document.querySelector('#zip');
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
-
-  userchoice.addEventListener('input', async (event) => {
-    console.log(event.target.value);
-  })
-
+  
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
-    button.addEventListener('click', async (submitEvent) => {
-      submitEvent.preventDefault();
-      console.log('clicked');
-      const restaurants = dataHandler(arrayFromJson);
-      createHtmlList(restaurants);
+    let currentArray = [];
+
+    userchoice.addEventListener('input', async (event) => {
+      if (currentArray === undefined) { return; }
+      console.log(event.target.value);
+      const filterSearch = currentArray.filter((item) => {
+         return item.name === event.target.value
+      });
+      console.log(filterSearch);
+    });
+
+      button.addEventListener('click', async (submitEvent) => {
+        submitEvent.preventDefault();
+        // console.log('clicked');
+        const restaurants = dataHandler(arrayFromJson);
+        createHtmlList(restaurants);
     });
   }
 }
