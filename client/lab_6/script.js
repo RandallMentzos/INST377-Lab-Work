@@ -1,17 +1,18 @@
 function getRandomIntInclusive(min, max) {
   const newMin = Math.ceil(min);
   const newMax = Math.floor(max);
-  return Math.floor(Math.random() * (newMax - newMin + 1) + newMin); 
-};
+  return Math.floor(Math.random() * (newMax - newMin + 1) + newMin);
+}
 
 function dataHandler (restoArray) {
   console.log('fired data handler');
-  console.table(restoArray); 
   const range = [...Array(15).keys()];
-  range.forEach(item => {
-    console.log('range item', item);
-  })
-  
+  const newList = range.map((item, index) => {
+    const restNum = getRandomIntInclusive(0, restoArray.length - 1);
+    return restoArray[restNum]
+  });
+
+  console.log(newList);
   // this is called "dot notation"
   // arrayFromJson.data - we're accessing a key called 'data' on the returned object
   // it contains all 1,000 records we need
