@@ -20,7 +20,7 @@ function createHtmlList(collection) {
   const targetList = document.querySelector('.resto_list');
   targetList.innerHTML = '';
   collection.forEach((item) => {
-    const newLines = `<li>${item.name.toLowerCase()}</li>`;
+    const newLines = `<li>${item.name.toLowerCase()}<br>${item.zip}</li>`;
     targetList.innerHTML += newLines;
   });
 }
