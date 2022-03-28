@@ -27,6 +27,8 @@ function createHtmlList(collection) {
 async function mainEvent() {
   const button = document.querySelector('.submit');
   button.style.display = 'none';
+  const userchoice = document.querySelector('#resto-name');
+  const userlocation = document.querySelector('#zip-code');
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
 
