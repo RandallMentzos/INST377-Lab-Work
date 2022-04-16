@@ -71,7 +71,7 @@ function createHtmlList(collection, entry, numba) {
 
   // the part of the page that we want to add the search results to
   const targetList = document.querySelector('.resto_list');
-  targetList.innerHTML = ''; // innerHTML = inner text
+  targetList.innerHTML = '';
 
   displayed.forEach((item) => { // this part actually adds the updated search to the user display
     const newLines = `<li>${item.name.toLowerCase()}<br>${item.zip}</li>`;
