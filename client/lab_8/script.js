@@ -52,15 +52,18 @@ function createHtmlList(collection, entry, numba) {
   targetList.innerHTML = '';
 
   displayed.forEach((item) => {
+    // eslint-disable-next-line prefer-template
     eachName = (item.name.length < 30) ? item.name : item.name.substr(0, 27) + '...';
     const newLines = `<li>${eachName.toLowerCase()}, ${item.zip}</li>`;
     targetList.innerHTML += newLines;
   });
+
+  return displayed;
 }
 
 function initMap(targetId) {
-  const coord = [38.9, -76.8721]
-  const map = L.map(targetId).setView(coord, 10);
+  const baseCoord = [38.9, -76.8721];
+  const map = L.map(targetId).setView(baseCoord, 10);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -72,6 +75,15 @@ function initMap(targetId) {
   return map;
 }
 
+function addMapMarkers(map, locationArray) {
+  locationArray.forEach((item) => {
+    coord = item.geocoded_column_1?.coordinates;
+    if (coord === undefined) { return; }
+    console.log(coord);
+    L.marker([coord[1], coord[0]]).addTo(map);
+  });
+}
+
 // main code works even if the user has input before clicking, or if user clicks w/no input
 async function mainEvent() {
   const button = document.querySelector('.submit');
@@ -79,11 +91,15 @@ async function mainEvent() {
   const userchoice = document.querySelector('#resto_name');
   const userlocation = document.querySelector('#zip');
   const map = initMap('map');
+
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
   const arrayFromJson = await results.json();
+  localStorage.setItem('restaurants', JSON.stringify(arrayFromJson));
+  const storedData = localStorage.getItem('restaurants');
+  const storedDataArray = JSON.parse(storedData);
 
   // all of the website's functionality is in here; user actions are what run the functions:
-  if (arrayFromJson.length > 0) { // site is static/inactive until the back-end data starts loading
+  if (storedDataArray.length > 0) { // site is static/inactive until the back-end data startsloading
     button.style.display = 'block';
     let currentArray = [];
     let filterPhrase = '';
@@ -108,8 +124,9 @@ async function mainEvent() {
 
     button.addEventListener('click', async (submitEvent) => {
       submitEvent.preventDefault();
-      currentArray = dataHandler(arrayFromJson);
-      createHtmlList(currentArray, filterPhrase, filterNum);
+      currentArray = dataHandler(storedDataArray);
+      displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
+      addMapMarkers(map, displayedRestaurants);
       // when submit button is clicked, "currentArray" copies the whole data set for filtering,
       // "createHtmlList" displays the initial results that match the user's pre-entered filters,
       // Then the other "input" eventListeners (for name & zip) handle all future activity.
