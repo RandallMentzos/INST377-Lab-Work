@@ -116,6 +116,8 @@ async function mainEvent() {
       filterPhrase = event.target.value;
       if (currentArray.length < 1) { return; }
       createHtmlList(currentArray, filterPhrase, filterNum);
+      displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
+      addMapMarkers(map, displayedRestaurants);
       // reads and stores user input from "Restaurant name";
       // once they click submit and get their initial search results (currentArray),
       // createHtmlList auto-filters & updates the data based on new input.
@@ -125,6 +127,9 @@ async function mainEvent() {
       filterNum = event.target.value;
       if (currentArray.length < 1) { return; }
       createHtmlList(currentArray, filterPhrase, filterNum);
+      displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
+      addMapMarkers(map, displayedRestaurants);
+
       // same as above, but this updates the results based on user input in "zip code"
     });
 
