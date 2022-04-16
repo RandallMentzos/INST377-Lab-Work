@@ -22,9 +22,10 @@ function createHtmlList(collection, entry, numba) {
 
   // the next two "filter functions" apply filters based on user-input before we change the page
   const filterSearch = collection.filter((item) => {
-    currentname = item.name.toLowerCase();
+    currentname = item.name;
+    namefixed = currentname.toLowerCase();
     currentinput = entry.toLowerCase();
-    return currentname.includes(currentinput);
+    return namefixed.includes(currentinput);
   });
 
   const filterZip = filterSearch.filter((item) => {
@@ -51,13 +52,15 @@ function createHtmlList(collection, entry, numba) {
   targetList.innerHTML = '';
 
   displayed.forEach((item) => {
-    const newLines = `<li>${item.name.toLowerCase()}<br>${item.zip}</li>`;
+    eachName = (item.name.length < 30) ? item.name : item.name.substr(0, 27) + '...';
+    const newLines = `<li>${eachName.toLowerCase()}, ${item.zip}</li>`;
     targetList.innerHTML += newLines;
   });
 }
 
 function initMap(targetId) {
-  const map = L.map(targetId).setView([51.505, -0.09], 13);
+  const coord = [38.9, -76.8721]
+  const map = L.map(targetId).setView(coord, 10);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
