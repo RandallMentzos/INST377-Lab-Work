@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="banner"><h1>Randall Mentzos Lab 7: Filtering Search by User Input</h1></div>
+
+        <div class="container">
+            <form method="get" class="main_form">
+                <div class="wrapper">
+                    <div class="form_inputs">
+                        <label for="resto_name">Restaurant Name</label>
+                        <input type="text" name="resto_name" id="resto_name"></input>
+                        <label for="zip">Zip Code</label>
+                        <input type="text" name="zip" id="zip"></input>
+                    </div>
+                        
+                    <fieldset class="vegan">
+                        <legend>Veggie or Vegan?</legend>
+                        <label for="yes" class="radio_label">Yes</label>
+                        <input id="yes"
+                            name="vegan"
+                            type="radio"
+                            value="yes">
+                        <label for="no" class="radio_label">No</label>
+                        <input id="no"
+                            name="vegan"
+                            type="radio"
+                            value="no"
+                            checked>
+                    </fieldset>
+        
+                    <button class="submit" type="submit">Search</button>
+                    
+                </div>
+            </form>
+                
+
+            <div class="other_text"> 
+                <h2>Restaurant List</h2>
+                <ul class="resto_list">
+                
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
