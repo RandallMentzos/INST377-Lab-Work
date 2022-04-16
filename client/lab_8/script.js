@@ -41,7 +41,7 @@ function createHtmlList(collection, entry, numba) {
 
   // eslint-disable-next-line no-unused-vars
   const displayed = range2.map((item, index) => {
-    let restNum = getRandomIntInclusive(0, (displaylength - 1));
+    let restNum = getRandomIntInclusive(0, (filterZip.length - 1));
     let thisone = filterZip.splice(restNum, 1);
     displaylength -= 1;
     return thisone[0];
@@ -76,6 +76,12 @@ function initMap(targetId) {
 }
 
 function addMapMarkers(map, locationArray) {
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.remove();
+    }
+  });
+
   locationArray.forEach((item) => {
     coord = item.geocoded_column_1?.coordinates;
     if (coord === undefined) { return; }
