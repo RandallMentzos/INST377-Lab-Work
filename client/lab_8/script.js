@@ -98,14 +98,15 @@ async function mainEvent() {
   const userlocation = document.querySelector('#zip');
   const map = initMap('map');
 
-  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+  const results = await fetch('/api/foodServicesPG');
   const arrayFromJson = await results.json();
   localStorage.setItem('restaurants', JSON.stringify(arrayFromJson));
   const storedData = localStorage.getItem('restaurants');
   const storedDataArray = JSON.parse(storedData);
+  const newTable = storedDataArray.data;
 
   // all of the website's functionality is in here; user actions are what run the functions:
-  if (storedDataArray.length > 0) { // site is static/inactive until the back-end data startsloading
+  if (newTable.length > 0) { // site is static/inactive until the back-end data loads
     button.style.display = 'block';
     let currentArray = [];
     let filterPhrase = '';
@@ -135,7 +136,7 @@ async function mainEvent() {
 
     button.addEventListener('click', async (submitEvent) => {
       submitEvent.preventDefault();
-      currentArray = dataHandler(storedDataArray);
+      currentArray = dataHandler(newTable);
       displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
       addMapMarkers(map, displayedRestaurants);
       // when submit button is clicked, "currentArray" copies the whole data set for filtering,

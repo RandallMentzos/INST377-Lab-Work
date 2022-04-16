@@ -9,7 +9,7 @@ import labRoutes from './server/labRoutes.js';
 
 dotenv.config();
 const __dirname = path.resolve();
-// import db from './server/database/initializeDB.js';
+import db from './server/database/initializeDB.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -39,8 +39,8 @@ async function bootServer() {
   try {
     app.listen(PORT, async () => {
       // Turn these back on in later labs
-      // const mysql = await db.sequelizeDB;
-      // await mysql.sync();
+      const mysql = await db.sequelizeDB;
+      await mysql.sync();
       console.log(`Listening on: http//localhost:${PORT}`);
       console.log('environment:', process.env.CONTEXT);
     });
