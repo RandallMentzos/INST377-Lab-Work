@@ -6,20 +6,44 @@ function getRandomIntInclusive(min, max) {
 
 function dataHandler (restoArray) {
   // console.log('fired data handler');
-  const range = [...Array(15).keys()];
+  const listSize = restoArray.length;
+  const range = [...Array(listSize).keys()];
   // eslint-disable-next-line no-unused-vars
-  const newList = range.map((item, index) => {
-    const restNum = getRandomIntInclusive(0, restoArray.length - 1);
-    return restoArray[restNum];
-  });
+  const newList = range.map((item, index) => restoArray[index]);
   return newList;
 }
 
-function createHtmlList(collection) {
+function createHtmlList(collection, entry, numba) {
   // console.table(collection);
+
+  const filterSearch = collection.filter((item) => {
+    currentname = item.name.toLowerCase();
+    currentinput = entry.toLowerCase();
+    return currentname.includes(currentinput);
+  });
+
+  const filterZip = filterSearch.filter((item) => {
+    currentzip = numba;
+    restozip = item.zip;
+    return restozip.includes(currentzip);
+  });
+
+  let displaylength = Math.min(filterZip.length, 15);
+
+  const range2 = [...Array(displaylength).keys()];
+  const displayed = range2.map((item, index) => {
+    let restNum = getRandomIntInclusive(0, (displaylength - 1));
+    let thisone = filterZip.splice(restNum, 1);
+    // console.log(thisone[0]);
+    displaylength -= 1;
+    return thisone[0];
+  });
+
+  // console.log('displayed = ', displayed);
   const targetList = document.querySelector('.resto_list');
   targetList.innerHTML = '';
-  collection.forEach((item) => {
+
+  displayed.forEach((item) => {
     const newLines = `<li>${item.name.toLowerCase()}<br>${item.zip}</li>`;
     targetList.innerHTML += newLines;
   });
@@ -36,30 +60,23 @@ async function mainEvent() {
   if (arrayFromJson.length > 0) {
     button.style.display = 'block';
     let currentArray = [];
+    let filterPhrase = '';
+    let filterNum = '';
 
     userchoice.addEventListener('input', async (event) => {
+      filterPhrase = event.target.value;
+      console.log(filterPhrase);
       if (currentArray.length < 1) { return; }
       // console.log(event.target.value);
-
-      const filterSearch = currentArray.filter((item) => {
-        currentname = item.name.toLowerCase();
-        currentinput = event.target.value;
-        return currentname.includes(currentinput.toLowerCase());
-      });
-      createHtmlList(filterSearch);
-      // console.log(filterSearch);
+      createHtmlList(currentArray, filterPhrase, filterNum);
     });
 
     userlocation.addEventListener('input', async (event) => {
+      filterNum = event.target.value;
+      console.log(filterNum);
       if (currentArray.length < 1) { return; }
       // console.log(event.target.value);
-
-      const filterZip = currentArray.filter((item) => {
-        currentzip = event.target.value;
-        restozip = item.zip;
-        return restozip.includes(currentzip);
-      });
-      createHtmlList(filterZip);
+      createHtmlList(currentArray, filterPhrase, filterNum);
       // console.log(filterZip);
     });
 
@@ -67,7 +84,7 @@ async function mainEvent() {
       submitEvent.preventDefault();
       // console.log('clicked');
       currentArray = dataHandler(arrayFromJson);
-      createHtmlList(currentArray);
+      createHtmlList(currentArray, filterPhrase, filterNum);
     });
   }
 }
