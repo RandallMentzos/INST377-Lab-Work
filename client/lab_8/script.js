@@ -94,6 +94,7 @@ function refreshList(target, storage) {
   target.addEventListener('click', async(event) => {
     event.preventDefault();
     localStorage.clear();
+    console.log('storage cleared');
     const results = await fetch('/api/foodServicesPG');
     const arrayFromJson = await results.json();
     localStorage.setItem(storage, JSON.stringify(arrayFromJson));
@@ -116,7 +117,7 @@ async function mainEvent() {
 
   refreshList(refresh, retrievalVar);
 
-  const storedData = localStorage.getItem('restaurants');
+  const storedData = localStorage.getItem(retrievalVar);
   const storedDataArray = JSON.parse(storedData);
   const newTable = storedDataArray.data;
 
