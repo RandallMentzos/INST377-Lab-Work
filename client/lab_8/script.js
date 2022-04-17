@@ -90,17 +90,32 @@ function addMapMarkers(map, locationArray) {
   });
 }
 
+function refreshList(target, storage) {
+  target.addEventListener('click', async(event) => {
+    event.preventDefault();
+    localStorage.clear();
+    const results = await fetch('/api/foodServicesPG');
+    const arrayFromJson = await results.json();
+    localStorage.setItem(storage, JSON.stringify(arrayFromJson));
+    location.reload();
+  });
+}
+
 // main code works even if the user has input before clicking, or if user clicks w/no input
 async function mainEvent() {
   const button = document.querySelector('.submit');
   button.style.display = 'none';
+
   const userchoice = document.querySelector('#resto_name');
   const userlocation = document.querySelector('#zip');
+
+  const refresh = document.querySelector('#refresh_button');
+  const retrievalVar = 'restaurants';
+
   const map = initMap('map');
 
-  const results = await fetch('/api/foodServicesPG');
-  const arrayFromJson = await results.json();
-  localStorage.setItem('restaurants', JSON.stringify(arrayFromJson));
+  refreshList(refresh, retrievalVar);
+
   const storedData = localStorage.getItem('restaurants');
   const storedDataArray = JSON.parse(storedData);
   const newTable = storedDataArray.data;

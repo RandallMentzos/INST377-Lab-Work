@@ -94,10 +94,11 @@
     background-color: teal;
     padding: 10px;
     border: none;
-    margin: 15px 30px 30px 30px;
+    margin: 15px 30px 15px 30px;
     border-radius: 4px;
     width: 150px;
     align-self: center;
+    display: flex;
   }
   
   .submit:hover {
