@@ -99,6 +99,7 @@
     width: 150px;
     align-self: center;
     display: flex;
+    justify-content: center;
   }
   
   .submit:hover {
