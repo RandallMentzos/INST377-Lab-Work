@@ -60,6 +60,25 @@ router.route('/foodServicesPG')
     }
   });
 
+router.route('/foodServicesPG/:id')
+  .get(async (req, res) => {
+    try {
+      // req.params.id
+      // TODO: if id is not a number, return
+      const {id} = req.params;
+
+      const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+      const data = await fetch(url);
+      const json = await data.json();
+      console.log(json);
+
+      res.json({data: json[id]});
+    } catch (err) {
+      console.log(err);
+      res.json({error: 'something went wrong'});
+    }
+  });
+
 router.route('/sqlDemo')
   .post(async (req, res) => {
     try {

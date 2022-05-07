@@ -122,7 +122,7 @@ async function mainEvent() {
   const newTable = storedDataArray.data;
 
   // all of the website's functionality is in here; user actions are what run the functions:
-  if (newTable.length > 0) { // site is static/inactive until the back-end data loads
+  if (newTable?.length > 0) { // site is static/inactive until the back-end data loads
     button.style.display = 'block';
     let currentArray = [];
     let filterPhrase = '';
