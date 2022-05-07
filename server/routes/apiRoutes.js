@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import fetch from 'node-fetch';
 
 import foodServiceRoutes from './foodServiceRoutes.js';
+import sqlDemoRoutes from './sqlDemoRoutes.js';
 
 import db from '../database/initializeDB.js';
 import hallIdQuery from '../controllers/diningHall.js';
@@ -18,28 +19,15 @@ router.get('/', (req, res) => {
   // res.send('Welcome to the UMD Dining API!');
 });
 
-//subrouter inclusion demo
+// subrouter inclusion demo;
 router.use('/foodServicesPG', foodServiceRoutes);
+
+// demo food services custom query controller //
+router.use('/sqlDemo', sqlDemoRoutes);
 
 // /////////////////////////////////
 // Food Inspection Set Demos
 // /////////////////////////////////
-router.route('/sqlDemo')
-  .post(async (req, res) => {
-    try {
-      console.log(req.body);
-      console.log(req.body?.dining);
-      const hallId = req.body?.dining || 0;
-      const result = await db.sequelizeDB.query(hallIdQuery, {
-        replacements: { hall_id: hallId },
-        type: sequelize.QueryTypes.SELECT
-      });
-      res.json({data: result});
-    } catch (err) {
-      console.log(err);
-      res.send({message: 'Something went wrong on the SQL request'});
-    }
-  });
 
 // /////////////////////////////////
 // ////WholeMeal demos////////

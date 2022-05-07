@@ -51,6 +51,7 @@ function createHtmlList(collection, entry, numba) {
   const targetList = document.querySelector('.resto_list');
   targetList.innerHTML = '';
 
+  console.log(displayed);
   displayed.forEach((item) => {
     // eslint-disable-next-line prefer-template
     eachName = (item.name.length < 30) ? item.name : item.name.substr(0, 27) + '...';
@@ -108,7 +109,13 @@ async function mainEvent() {
   button.style.display = 'none';
 
   const userchoice = document.querySelector('#resto_name');
-  const userlocation = document.querySelector('#zip');
+  const category = document.querySelector('#category');
+  const catbutton = document.querySelector('#cat_submit');
+
+  catbutton.addEventListener('click', async(event) => {
+    console.log(event.target);
+    console.log(category.value);
+  });
 
   const refresh = document.querySelector('#refresh_button');
   const retrievalVar = 'restaurants';
@@ -140,15 +147,15 @@ async function mainEvent() {
       // createHtmlList auto-filters & updates the data based on new input.
     });
 
-    userlocation.addEventListener('input', async (event) => {
-      filterNum = event.target.value;
-      if (currentArray.length < 1) { return; }
-      createHtmlList(currentArray, filterPhrase, filterNum);
-      displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
-      addMapMarkers(map, displayedRestaurants);
+    // userlocation.addEventListener('input', async (event) => {
+      // filterNum = event.target.value;
+      // if (currentArray.length < 1) { return; }
+      // createHtmlList(currentArray, filterPhrase, filterNum);
+      // displayedRestaurants = createHtmlList(currentArray, filterPhrase, filterNum);
+      // addMapMarkers(map, displayedRestaurants);
 
       // same as above, but this updates the results based on user input in "zip code"
-    });
+    // });
 
     button.addEventListener('click', async (submitEvent) => {
       submitEvent.preventDefault();
