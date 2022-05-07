@@ -4,6 +4,8 @@ import sequelize from 'sequelize';
 import chalk from 'chalk';
 import fetch from 'node-fetch';
 
+import foodServiceRoutes from './foodServiceRoutes.js';
+
 import db from '../database/initializeDB.js';
 import hallIdQuery from '../controllers/diningHall.js';
 
@@ -16,69 +18,12 @@ router.get('/', (req, res) => {
   // res.send('Welcome to the UMD Dining API!');
 });
 
+//subrouter inclusion demo
+router.use('/foodServicesPG', foodServiceRoutes);
+
 // /////////////////////////////////
 // Food Inspection Set Demos
 // /////////////////////////////////
-router.route('/foodServicesPG')
-  .get(async (req, res) => {
-    try {
-      const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-      const data = await fetch(url);
-      const json = await data.json();
-      console.log(json);
-
-      res.json({data: json});
-    } catch (err) {
-      console.log(error);
-      res.json({error: error});
-    }
-  })
-  .put((req, res) => {
-    try {
-      res.json({message: 'put FoodServices endpoint'});
-    } catch (err) {
-      console.log(error);
-      res.json({error: 'Something went wrong on the server'});
-    }
-  })
-  .post((req, res) => {
-    try {
-      console.log('Touched post endpoint', req.body);
-      console.log(req.body?.resto);
-      res.json({message: 'post FoodServices endpoint'});
-    } catch (err) {
-      console.log(error);
-      res.json({error: 'Something went wrong on the server'});
-    }
-  })
-  .delete((req, res) => {
-    try {
-      res.json({message: 'delete FoodServices endpoint'});
-    } catch (err) {
-      console.log(error);
-      res.json({error: 'Something went wrong on the server'});
-    }
-  });
-
-router.route('/foodServicesPG/:id')
-  .get(async (req, res) => {
-    try {
-      // req.params.id
-      // TODO: if id is not a number, return
-      const {id} = req.params;
-
-      const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-      const data = await fetch(url);
-      const json = await data.json();
-      console.log(json);
-
-      res.json({data: json[id]});
-    } catch (err) {
-      console.log(err);
-      res.json({error: 'something went wrong'});
-    }
-  });
-
 router.route('/sqlDemo')
   .post(async (req, res) => {
     try {
